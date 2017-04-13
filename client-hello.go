@@ -54,7 +54,7 @@ func (ln *clientHelloListener) Accept() (net.Conn, error) {
 	return ClientHelloConn(c, ln.fn), nil
 }
 
-// ClientHelloConn wraps a net.Conn, reads the ClientHello
+// ClientHelloConn wraps a net.Conn, extracts the ClientHello
 // and calls fn. It is transparent to the user of the
 // net.Conn and is a does nothing after the ClientHello has
 // been extracted.
