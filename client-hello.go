@@ -98,15 +98,18 @@ func (ch *clientHelloConn) Read(b []byte) (n int, err error) {
 
 	hb, herr := handshakeRecord(hb)
 	if herr == io.ErrUnexpectedEOF {
+		if ch.buf != nil {
+			// Continue buffering the
+			// handshake and wait.
+			return n, err
+		}
+
 		// The handshake record was not read in
 		// a single call to Read. We buffer what
 		// we have and wait.
-		if ch.buf == nil {
-			ch.buf = bufferPool.Get().(*bytes.Buffer)
-			ch.buf.Grow(512 + 32)
-			ch.buf.Write(b[:n])
-		}
-
+		ch.buf = bufferPool.Get().(*bytes.Buffer)
+		ch.buf.Grow(512 + 32)
+		ch.buf.Write(b[:n])
 		return n, err
 	}
 
