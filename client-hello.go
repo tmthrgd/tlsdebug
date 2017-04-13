@@ -183,12 +183,7 @@ func parseHello(b []byte) ([]byte, error) {
 	}
 
 	typ := b[0]
-
-	var length uint32
-	for _, v := range b[1:4] {
-		length = (length << 8) | uint32(v)
-	}
-
+	length := uint32(b[1])<<16 | uint32(b[2])<<8 | uint32(b[3])
 	b = b[headerSize:]
 
 	const typeClientHello = 1
