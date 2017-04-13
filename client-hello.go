@@ -193,7 +193,7 @@ func parseHello(b []byte) ([]byte, error) {
 		return nil, fmt.Errorf("handshake record (%d) is not ClientHello", typ)
 	}
 
-	if uint32(len(b)) < length {
+	if int(length) > len(b) {
 		return nil, errors.New("handshake record has invalid length")
 	}
 
