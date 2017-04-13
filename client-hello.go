@@ -7,7 +7,6 @@ package tlsdebug
 
 import (
 	"bytes"
-	"encoding/binary"
 	"errors"
 	"fmt"
 	"io"
@@ -139,8 +138,8 @@ func handshakeRecord(b []byte) ([]byte, error) {
 	}
 
 	typ := b[0]
-	vers := binary.BigEndian.Uint16(b[1:])
-	length := binary.BigEndian.Uint16(b[3:])
+	vers := uint16(b[1])<<8 | uint16(b[2])
+	length := uint16(b[3])<<8 | uint16(b[4])
 	b = b[headerSize:]
 
 	const typeHandshake = 22
