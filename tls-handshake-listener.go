@@ -31,21 +31,21 @@ type TLSHandshakeFunc func(conn net.Conn, cs *tls.ConnectionState, err error)
 // The returned net.Listener's Accept will panic if the net.Conn is not
 // a *tls.Conn. ln should be a the return value of tls.NewListener.
 func HTTPHandshakeListener(ln net.Listener, srv *http.Server, fn TLSHandshakeFunc) net.Listener {
-	return &httpHandshakeListener{
+	return &tlsHandshakeListener{
 		ln, fn,
 		srv.ReadTimeout,
 		srv.WriteTimeout,
 	}
 }
 
-type httpHandshakeListener struct {
+type tlsHandshakeListener struct {
 	net.Listener
 	fn           TLSHandshakeFunc
 	readTimeout  time.Duration
 	writeTimeout time.Duration
 }
 
-func (ln *httpHandshakeListener) Accept() (net.Conn, error) {
+func (ln *tlsHandshakeListener) Accept() (net.Conn, error) {
 	c, err := ln.Listener.Accept()
 	if err != nil {
 		return nil, err
@@ -53,7 +53,7 @@ func (ln *httpHandshakeListener) Accept() (net.Conn, error) {
 
 	tc, ok := c.(*tls.Conn)
 	if !ok {
-		panic("tlsdebug.httpHandshakeListener: Accept did not return *tls.Conn")
+		panic("tlsdebug.tlsHandshakeListener: Accept did not return *tls.Conn")
 	}
 
 	if ln.readTimeout != 0 || ln.writeTimeout != 0 {
