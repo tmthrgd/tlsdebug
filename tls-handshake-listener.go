@@ -3,7 +3,7 @@
 // Modified BSD License license that can be found in
 // the LICENSE file.
 
-package httputils
+package tlsdebug
 
 import (
 	"crypto/tls"
