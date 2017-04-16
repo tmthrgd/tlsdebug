@@ -12,8 +12,8 @@ const (
 	tls13_VersionTLS13Draft18 = 0x7f00 | 18
 )
 
-// VersionName returns a human readable name
-// associated with a given TLS version code.
+// VersionName returns a human readable name associated
+// with a given TLS version code.
 //
 // It returns an empty string if the version is unknown.
 func VersionName(vers uint16) string {
@@ -21,8 +21,7 @@ func VersionName(vers uint16) string {
 }
 
 var versionToName = map[uint16]string{
-	// XXX: keep in sync with crypto/tls and
-	// cloudflare/tls-tris.
+	// XXX: keep in sync with crypto/tls and cloudflare/tls-tris.
 	tls.VersionSSL30:          "SSL 3.0",
 	tls.VersionTLS10:          "TLS 1.0",
 	tls.VersionTLS11:          "TLS 1.1",

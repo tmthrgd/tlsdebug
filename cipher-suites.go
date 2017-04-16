@@ -37,8 +37,7 @@ type CipherSuite struct {
 }
 
 var cipherSuites = map[uint16]*CipherSuite{
-	// XXX: keep in sync with crypto/tls and
-	// cloudflare/tls-tris.
+	// XXX: keep in sync with crypto/tls and cloudflare/tls-tris.
 	tls13_TLS_CHACHA20_POLY1305_SHA256:          {suiteTLS13, "TLS_CHACHA20_POLY1305_SHA256"},
 	tls13_TLS_AES_128_GCM_SHA256:                {suiteTLS13, "TLS_AES_128_GCM_SHA256"},
 	tls13_TLS_AES_256_GCM_SHA384:                {suiteTLS13, "TLS_AES_256_GCM_SHA384"},
@@ -83,8 +82,7 @@ func (cs *CipherSuite) Name() string {
 	return cs.name
 }
 
-// ECDHE returns true if the cipher suite uses an ECDHE
-// key agreement.
+// ECDHE returns true if the cipher suite uses an ECDHE key agreement.
 //
 // It returns false if cs is nil.
 func (cs *CipherSuite) ECDHE() bool {
