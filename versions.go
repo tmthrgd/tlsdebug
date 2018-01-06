@@ -10,6 +10,7 @@ import "crypto/tls"
 const (
 	tls13_VersionTLS13        = 0x0304
 	tls13_VersionTLS13Draft18 = 0x7f00 | 18
+	tls13_VersionTLS13Draft22 = 0x7f00 | 22
 )
 
 // VersionName returns a human readable name associated
@@ -28,4 +29,5 @@ var versionToName = map[uint16]string{
 	tls.VersionTLS12:          "TLS 1.2",
 	tls13_VersionTLS13:        "TLS 1.3",
 	tls13_VersionTLS13Draft18: "TLS 1.3 (draft 18)",
+	tls13_VersionTLS13Draft22: "TLS 1.3 (draft 22)",
 }
