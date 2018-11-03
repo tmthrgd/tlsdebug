@@ -7,11 +7,9 @@ package tlsdebug
 
 import "crypto/tls"
 
-const (
-	tls13_VersionTLS13        = 0x0304
-	tls13_VersionTLS13Draft18 = 0x7f00 | 18
-	tls13_VersionTLS13Draft22 = 0x7f00 | 22
-)
+// TODO: remove once TLS 1.3 support is in all supported
+// golang versions.
+const tls_VersionTLS13 = 0x0304
 
 // VersionName returns a human readable name associated
 // with a given TLS version code.
@@ -22,12 +20,10 @@ func VersionName(vers uint16) string {
 }
 
 var versionToName = map[uint16]string{
-	// XXX: keep in sync with crypto/tls and cloudflare/tls-tris.
-	tls.VersionSSL30:          "SSL 3.0",
-	tls.VersionTLS10:          "TLS 1.0",
-	tls.VersionTLS11:          "TLS 1.1",
-	tls.VersionTLS12:          "TLS 1.2",
-	tls13_VersionTLS13:        "TLS 1.3",
-	tls13_VersionTLS13Draft18: "TLS 1.3 (draft 18)",
-	tls13_VersionTLS13Draft22: "TLS 1.3 (draft 22)",
+	// XXX: keep in sync with crypto/tls.
+	tls.VersionSSL30: "SSL 3.0",
+	tls.VersionTLS10: "TLS 1.0",
+	tls.VersionTLS11: "TLS 1.1",
+	tls.VersionTLS12: "TLS 1.2",
+	tls_VersionTLS13: "TLS 1.3",
 }
