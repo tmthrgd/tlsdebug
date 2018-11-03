@@ -85,7 +85,7 @@ func (ch *clientHelloConn) Close() error {
 
 func (ch *clientHelloConn) Read(b []byte) (n int, err error) {
 	n, err = ch.Conn.Read(b)
-	if ch.doneCH || (err != nil && err != io.EOF) {
+	if ch.doneCH || err != nil && err != io.EOF {
 		return n, err
 	}
 
